@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.catalog.Item;
@@ -35,8 +36,8 @@ public class CartController {
 	@Autowired
 	private  OrderDetailsService orderDetailsService;
 	
-	@GET
-	@RequestMapping("cart")
+
+	@GetMapping("cart")
 	public String cart(HttpSession session, Model model) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
@@ -45,8 +46,8 @@ public class CartController {
 		return "user/cart/cart";
 	}
 	
-	@GET
-	@RequestMapping("cart/add")
+
+	@GetMapping("cart/add")
 	public String order(@RequestParam("itemId") int itemId,@RequestParam("quantity") Integer quantity, Model model, HttpSession session) {
 		if(quantity == null) {
 			quantity = 1;
@@ -70,8 +71,8 @@ public class CartController {
 		return "redirect:../cart";
 	}
 
-	@POST
-	@RequestMapping("cart/delete-item")
+
+	@PostMapping("cart/delete-item")
 	public String deleteItemCart(@RequestParam("itemId") int itemId, HttpSession session) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
@@ -81,8 +82,7 @@ public class CartController {
 		return "redirect:../cart";
 	}
 	
-	@POST
-	@RequestMapping("cart/update")
+	@PostMapping("cart/update")
 	public String updateItem(@RequestParam("itemId") int itemId,@RequestParam("quantity") Integer quantity, HttpSession session) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
@@ -92,8 +92,7 @@ public class CartController {
 		return "redirect:../cart";
 	}
 	
-	@GET
-	@RequestMapping("cart/order")
+	@PostMapping ("cart/order")
 	public String order(HttpSession session, Model model) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
@@ -107,8 +106,8 @@ public class CartController {
 		return "user/order/orderform";
 	}
 	
-	@POST
-	@RequestMapping("cart/order/save")
+
+	@PostMapping("cart/order/save")
 	public String saveOrder(HttpSession session, OrderDetails orderDetails) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");

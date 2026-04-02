@@ -1,11 +1,12 @@
 package com.rainbowforest.Application.controller.user;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.user.UserAccountDetails;
@@ -19,8 +20,7 @@ public class UserProfileController {
 	@Autowired
 	private UserService userService;
 	
-	@GET
-	@RequestMapping("my-profile")
+	@GetMapping("my-profile")
 	public String userProfile(Model model) {
 		String userName = UserUtilities.getLoggedUser();
 		UserAccountDetails userAccountDetails = userService.getLoggedUser(userName); 
@@ -28,8 +28,7 @@ public class UserProfileController {
 		return "user/userprofile/userprofile";
 	}
 	
-	@POST
-	@RequestMapping("my-profile/update")
+	@PostMapping("my-profile/update")
 	public String updatePassword(
 			UserAccountDetails user,
 			@RequestParam("oldPassword") String oldPassword, 

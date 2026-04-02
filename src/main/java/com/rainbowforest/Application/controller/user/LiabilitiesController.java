@@ -2,11 +2,12 @@ package com.rainbowforest.Application.controller.user;
 
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.GET;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
@@ -26,8 +27,8 @@ public class LiabilitiesController {
 	@Autowired
 	private OrderService orderService;
 	
-	@GET
-	@RequestMapping("liabilities")
+
+	@GetMapping("liabilities")
 	public String liabilities(Model model) {
 		String userName = UserUtilities.getLoggedUser();
 		List<ConstructionSite> constructionSiteList = constructionSiteService.getAllConstructionSiteByUserName(userName);
@@ -39,8 +40,8 @@ public class LiabilitiesController {
 		return "user/liabilities/liabilities";
 	}
 	
-	@GET
-	@RequestMapping("liabilities/details")
+
+	@GetMapping("liabilities/details")
 	public String liabilitiesDetails(@RequestParam("csId") int csId, Model model) {
 		List<Order> orders = orderService.findAllOrderByConstructionSiteId(csId);
 		model.addAttribute("orders", orders);

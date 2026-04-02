@@ -2,8 +2,7 @@ package com.rainbowforest.Application.controller.admin;
 
 import java.util.List;
 import java.util.Locale;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
@@ -11,9 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 import com.rainbowforest.Application.model.user.UserAccount;
 import com.rainbowforest.Application.model.user.UserAccountDetails;
@@ -34,8 +31,8 @@ public class AdminUserController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@GET
-	@RequestMapping ("admin/user-form")
+
+	@GetMapping ("admin/user-form")
 	public String userForm(Model model) {
 		UserAccountDetails user = new UserAccountDetails();
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
@@ -44,8 +41,8 @@ public class AdminUserController {
 		return "admin/user/userform";
 	}
 	
-	@POST
-	@RequestMapping ("admin/save-user")
+
+	@PostMapping ("admin/save-user")
 	public String saveUser(@ModelAttribute("user") UserAccountDetails user, Model model, BindingResult result, Locale locale) {
 		String returnPage = null;
 		UserAccountDetailsValidator validator = new UserAccountDetailsValidator();
@@ -69,23 +66,23 @@ public class AdminUserController {
 		return returnPage;
 	}
 	
-	@GET
-	@RequestMapping ("admin/users")
+
+	@GetMapping ("admin/users")
 	public String getAllUsers(Model model) {
 		List<UserAccountDetails> users = userService.findAllUsers();
 		model.addAttribute("users", users);
 		return "admin/user/users";
 	}
 		
-	@POST
-	@RequestMapping("admin/users/delete-user")
+
+	@PostMapping("admin/users/delete-user")
 	public String deleteUser(@RequestParam ("usid") int userId) {
 		userService.deleteUser(userId);
 		return "redirect:../users";
 	}
 		
-	@GET
-	@RequestMapping("admin/users/edit-user")
+
+	@GetMapping("admin/users/edit-user")
 	public String editUser(@RequestParam ("usid") int userId, Model model) {
 		UserAccountDetails user = userService.findOneById(userId);
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
@@ -94,8 +91,8 @@ public class AdminUserController {
 		return "admin/user/edituser";
 	}
 
-	@POST
-	@RequestMapping("admin/users/update-user")
+
+	@PostMapping("admin/users/update-user")
 	public String updateDetails(
 			UserAccountDetails user, 
 			@RequestParam ("usid") int usid,
@@ -111,40 +108,40 @@ public class AdminUserController {
 		return "admin/user/users";
 	}
 		
-	@GET
-	@RequestMapping("admin/users/user-details")
+
+	@GetMapping("admin/users/user-details")
 	public String userDetails(@RequestParam ("usid") int userId, Model model) {
 		UserAccountDetails user = userService.findOneById(userId);
 		model.addAttribute("user", user);
 		return "admin/user/userdetails";
 	}
 		
-	@GET
-	@RequestMapping("admin/users/user")
+
+	@GetMapping("admin/users/user")
 	public String user(@RequestParam("userName") String userName, Model model) {
 		UserAccount user = userService.findOneByUserName(userName);
 		model.addAttribute("user", user);
 		return "admin/user/user";
 	}
 		
-	@GET
-	@RequestMapping ("admin/security")
+
+	@GetMapping ("admin/security")
 	public String security(Model model) {
 		List<UserAccount> users = userService.findAllAccount();
 		model.addAttribute("users", users);
 		return "admin/user/security";
 	}
 		
-	@GET
-	@RequestMapping("admin/security/edit")
+
+	@GetMapping("admin/security/edit")
 	public String editSecurity(@RequestParam("usid") int usid, Model model) {
 		UserAccount user = userService.findOneAccountById(usid);
 		model.addAttribute("user", user);
 		return "admin/user/editsecurity";
 	}
 		
-	@POST
-	@RequestMapping("admin/security/update")
+
+	@PostMapping("admin/security/update")
 	public String updateSecurity(
 			UserAccount user, 
 			@RequestParam("usid") int usid, 

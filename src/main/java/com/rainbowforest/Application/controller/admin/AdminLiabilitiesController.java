@@ -26,7 +26,7 @@ public class AdminLiabilitiesController {
 	@Autowired
 	private OrderService orderService;
 	
-	@GetMapping("admin/liabilities")
+	@GetMapping("/admin/liabilities")
 	public String liabilities(Model model) {
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
 		List<Order> orders = orderService.findAllOrders();
@@ -36,7 +36,7 @@ public class AdminLiabilitiesController {
 		return "admin/liabilities/liabilities";
 	}
 	
-	@GetMapping("admin/liabilities/details")
+	@GetMapping("/admin/liabilities/details")
 	public String liabilitiesDetails(@RequestParam("csId") int csId, Model model) {
 		List<Order> orders = orderService.findAllOrderByConstructionSiteId(csId);
 		model.addAttribute("orders", orders);

@@ -9,7 +9,7 @@
     @Controller
     public class AdminPageController {
 
-        @GetMapping("admin")
+        @GetMapping("/admin")
         @Secured(value = {"ROLE_ADMIN"})
         public String adminPage() {
             return "admin/admindashboard";

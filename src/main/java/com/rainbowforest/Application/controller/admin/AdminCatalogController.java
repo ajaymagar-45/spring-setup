@@ -24,7 +24,7 @@ public class AdminCatalogController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@GetMapping("admin/catalog/add-item")
+	@GetMapping("/admin/catalog/add-item")
 	public String addItem(Model model) {
 		Product product = new Product();
 		model.addAttribute("product", product);
@@ -32,7 +32,7 @@ public class AdminCatalogController {
 	}
 	
 
-	@PostMapping("admin/catalog/save-item")
+	@PostMapping("/admin/catalog/save-item")
 	public String saveItem(@ModelAttribute("product") Product product, Model model, BindingResult result, Locale locale) {
 		String returnPage = null;
 		ProductValidator validator = new ProductValidator();
@@ -52,28 +52,28 @@ public class AdminCatalogController {
 		return returnPage;
 	}
 	
-	@GetMapping("admin/catalog/products")
+	@GetMapping("/admin/catalog/products")
 	public String products(Model model) {
 		List<Product> products = productService.findAllProducts();
 		model.addAttribute("products", products);
 		return "admin/catalog/products";
 	}
 	
-	@GetMapping("admin/catalog/edit-item")
+	@GetMapping("/admin/catalog/edit-item")
 	public String editItem(@RequestParam ("itemId") int itemId, Model model) {
 		Product product = productService.findOneProduct(itemId);
 		model.addAttribute("product", product);
 		return "admin/catalog/editproduct";
 	}
 	
-	@GetMapping("admin/catalog/product")
+	@GetMapping("/admin/catalog/product")
 	public String product(@RequestParam ("productName") String productName, Model model) {
 		Product product = productService.findOneProductByName(productName);
 		model.addAttribute("product", product);
 		return "admin/catalog/product";
 	}
 	
-	@PostMapping("admin/catalog/update-item")
+	@PostMapping("/admin/catalog/update-item")
 	public String updateItem(@RequestParam("itemId") int itemId,Product product, Model model) {
 		
 		productService.updateItem(

@@ -29,14 +29,14 @@ public class AdminConstructionSiteController {
 	@Autowired
 	private MessageSource messageSource;
 	
-	@GetMapping("admin/cs-form")
+	@GetMapping("/admin/cs-form")
 	public String csForm(Model model) {
 		ConstructionSite cs = new ConstructionSite();
 		model.addAttribute("cs", cs);
 		return "admin/constructionsite/constructionsiteform";
 	}
 	
-	@PostMapping("admin/save-cs")
+	@PostMapping("/admin/save-cs")
 	public String saveCs(@ModelAttribute("cs") ConstructionSite cs, @RequestParam ("status") int status, Model model, BindingResult result, Locale locale) {
 		String returnPage = null;
 		ConstructionSiteValidator validator = new ConstructionSiteValidator();
@@ -57,14 +57,14 @@ public class AdminConstructionSiteController {
 		return returnPage;
 	}
 	
-	@GetMapping("admin/construction-site/stock-list")
+	@GetMapping("/admin/construction-site/stock-list")
 	public String stockList(Model model) {
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
 		model.addAttribute("constructionSiteList", constructionSiteList);
 		return "admin/constructionsite/stocklist";
 	}
 	
-	@GetMapping("admin/construction-site/stock-list/details")
+	@GetMapping("/admin/construction-site/stock-list/details")
 	public String stockListDetails(@RequestParam("csId") int csId,Model model) {
 		List<Order> orders = orderService.findAllOrderByConstructionSiteId(csId);
 		model.addAttribute("orders", orders);
@@ -78,14 +78,14 @@ public class AdminConstructionSiteController {
 		return "admin/constructionsite/constructionsites";
 	}
 	
-	@GetMapping("admin/construction-sites/edit")
+	@GetMapping("/admin/construction-sites/edit")
 	public String editCs(@RequestParam("csid") int csid, Model model) {
 		ConstructionSite cs = constructionSiteService.findOneCsById(csid);
 		model.addAttribute("cs", cs);
 		return "admin/constructionsite/editconstructionsite";
 	}
 	
-	@PostMapping("admin/construction-sites/update")
+	@PostMapping("/admin/construction-sites/update")
 	public String updateCs(@RequestParam("csid") Integer id, ConstructionSite cs) {
 		constructionSiteService.updateConstructionSiteAdress(
 				cs.getConstructionSiteAdress().getStreet(), 

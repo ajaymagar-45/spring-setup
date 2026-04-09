@@ -25,7 +25,7 @@ public class AdminOrderController {
 	private OrderDetailsService orderDetailsService;
 	
 
-	@GetMapping("admin/orders")
+	@GetMapping("/admin/orders")
 	public String orders(Model model) {
 		List<Order> orders = orderService.findAllOrders();
 		model.addAttribute("orders", orders);
@@ -33,7 +33,7 @@ public class AdminOrderController {
 	}
 	
 
-	@GetMapping("admin/orders/details")
+	@GetMapping("/admin/orders/details")
 	public String orderDetails(@RequestParam("orderDetailsId") int orderDetailsId, Model model) {
 		OrderDetails orderDetails = orderDetailsService.findOneOrderDetailsById(orderDetailsId);
 		model.addAttribute("orderDetails", orderDetails);
@@ -41,14 +41,14 @@ public class AdminOrderController {
 	}
 	
 
-	@RequestMapping("admin/orders/update-status")
+	@RequestMapping("/admin/orders/update-status")
 	public String updateStatus(@RequestParam("orderId") int orderId, @RequestParam("status") int status) {
 		orderService.updateOrderStatus(status, orderId);
 		return "admin/order/orders";
 	}
 	
 
-	@GetMapping("admin/orders/history")
+	@GetMapping("/admin/orders/history")
 	public String ordersHistory(Model model) {
 		List<Order> orders = orderService.findAllOrders();
 		model.addAttribute("orders", orders);

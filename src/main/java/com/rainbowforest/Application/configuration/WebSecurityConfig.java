@@ -1,6 +1,7 @@
 package com.rainbowforest.Application.configuration;
 
 import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,49 +15,61 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
-		auth.jdbcAuthentication().dataSource(dataSource)
-		.passwordEncoder(new BCryptPasswordEncoder())
-		.usersByUsernameQuery("SELECT user_name , user_password, user_enabled FROM users WHERE user_name=?")
-		.authoritiesByUsernameQuery("SELECT user_name, user_role FROM users INNER JOIN authorities ON users.user_role_id = authorities.id WHERE user_name=?");
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        auth.jdbcAuthentication()
+//                .dataSource(dataSource)
+//                .passwordEncoder(new BCryptPasswordEncoder())
+//                .usersByUsernameQuery("SELECT user_name , user_password, user_enabled FROM users WHERE user_name=?")
+//                .authoritiesByUsernameQuery("SELECT user_name, user_role FROM users INNER JOIN authorities ON users.user_role_id = authorities.id WHERE user_name=?");
+//
+//
+//    }
 
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .usersByUsernameQuery(
+                        "SELECT user_name , user_password, user_enabled FROM users WHERE user_name=?")
+                .authoritiesByUsernameQuery(
+                        "SELECT user_name, user_role FROM users INNER JOIN authorities ON users.user_role_id = authorities.id WHERE user_name=?");
+    }
 
-	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers("/resources/**","/login","/login?error=true").permitAll()
-            .anyRequest().authenticated()
-			.and()
-			.formLogin()
-			.loginPage("/login")
-			.failureUrl("/login?error=true")
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests()
+                .antMatchers("/resources/**", "/login", "/login?error=true").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .failureUrl("/login?error=true")
                 .defaultSuccessUrl("/", true)
-			.usernameParameter("userName")
-			.passwordParameter("userPassword")
-			.permitAll()
-			.successForwardUrl("/")
-			.and().logout().permitAll()
-			.and()
-			.csrf().disable();
-		
-	
-	}
-	
-	@Override
-	public void configure(WebSecurity web) {
-		web.ignoring()
-		.antMatchers("/resources/**", "/static/**", "/css/**", "/img/");
-		super.configure(web);
-	}
-	
-	
+                .usernameParameter("userName")
+                .passwordParameter("userPassword")
+                .permitAll()
+                //.successForwardUrl("/")
+                .and().logout().permitAll()
+                .and()
+                .csrf().disable();
+
+
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/img/");
+        super.configure(web);
+    }
+
+
 }

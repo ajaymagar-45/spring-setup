@@ -27,7 +27,8 @@ public class UserProfileController {
 		model.addAttribute("userAccountDetails", userAccountDetails);
 		return "user/userprofile/userprofile";
 	}
-	
+
+
 	@PostMapping("my-profile/update")
 	public String updatePassword(
 			UserAccountDetails user,

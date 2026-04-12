@@ -40,6 +40,7 @@ public class AdminUserController {
 		model.addAttribute("user", user);
         return "admin/user/userform";
 	}
+
 	
 
 	@PostMapping ("/admin/save-user")
@@ -78,6 +79,7 @@ public class AdminUserController {
 	@PostMapping("/admin/users/delete-user")
 	public String deleteUser(@RequestParam ("usid") int userId) {
 		userService.deleteUser(userId);
+        System.out.println("Controller hit");
 		return "redirect:../users";
 	}
 		

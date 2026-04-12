@@ -19,13 +19,13 @@ public class Order {
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Column (name = "total_price")
-	private double totalPrice;
+	private Double totalPrice;
 	@Column (name = "date")
 	private LocalDate date;
 	@Column (name = "status")
-	private int status;
+	private Integer status;
 	@Column (name = "ordering_party")
 	private String orderingParty;
 	
@@ -36,11 +36,11 @@ public class Order {
 	@OneToOne (mappedBy = "order")
 	private OrderDetails orderDetails;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -60,11 +60,11 @@ public class Order {
 		this.date = date;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

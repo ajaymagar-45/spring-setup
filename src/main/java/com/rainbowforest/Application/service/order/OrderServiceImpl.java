@@ -16,17 +16,16 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	
-	@Override
-	public List<Order> findAllOrders() {
-		List<Order> orders = orderRepository.findAll();
-		return orders;
-	}
 
 	@Override
 	public void updateOrderStatus(int newStatus, int id) {
 		orderRepository.updateOrderStatus(newStatus, id);
 		
 	}
+    @Override
+    public List<Order> findAllOrders() {
+        return orderRepository.findAllWithConstructionSite();  // ✅ Uses JOIN FETCH
+    }
 
 	@Override
 	public List<Order> findAllOrderByConstructionSiteId(int csId) {

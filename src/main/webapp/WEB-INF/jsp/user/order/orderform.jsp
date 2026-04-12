@@ -14,11 +14,11 @@
 </head>
 <body>
 	<div id="container">
-		<%@include file="/WEB-INF/incl/header.app"%>
+		<%@include file="/WEB-INF/incl/jsp/header.app"%>
 		<div id="bar4">
 			<a href="/">Home </a><label>></label><a href="/catalog"> Catalog </a><label>></label><a href="/cart"> Cart</a><label>></label><a href="/cart/order"> Order</a>
 		</div>
-		<%@include file="/WEB-INF/incl/navigation.app"%>
+		<%@include file="/WEB-INF/incl/jsp/navigation.app"%>
 		<div id="bar3"></div>
 		<div id="main-content">
 			<div id="form-container">

@@ -37,7 +37,7 @@ public class AdminConstructionSiteController {
 	}
 	
 	@PostMapping("/admin/save-cs")
-	public String saveCs(@ModelAttribute("cs") ConstructionSite cs, @RequestParam ("status") int status, Model model, BindingResult result, Locale locale) {
+	public String saveCs(@ModelAttribute("cs") ConstructionSite cs, BindingResult result, Model model,  Locale locale) {
 		String returnPage = null;
 		ConstructionSiteValidator validator = new ConstructionSiteValidator();
 		validator.validate(cs, result);
@@ -47,16 +47,16 @@ public class AdminConstructionSiteController {
 			returnPage = "admin/constructionsite/constructionsiteform";
 		}
 		else {
-			cs.setStatus(status);
+
 			constructionSiteService.addConstructionSite(cs);
 			model.addAttribute("message", messageSource.getMessage("cs.save.success", null, locale));
 			model.addAttribute("cs", new ConstructionSite());
 			returnPage = "admin/constructionsite/constructionsiteform";
 		}
-		
+
 		return returnPage;
 	}
-	
+
 	@GetMapping("/admin/construction-site/stock-list")
 	public String stockList(Model model) {
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
@@ -86,7 +86,7 @@ public class AdminConstructionSiteController {
 	}
 	
 	@PostMapping("/admin/construction-sites/update")
-	public String updateCs(@RequestParam("csid") Integer id, ConstructionSite cs) {
+	public String updateCs(@RequestParam("csid") Integer id, @ModelAttribute ConstructionSite cs) {
 		constructionSiteService.updateConstructionSiteAdress(
 				cs.getConstructionSiteAdress().getStreet(), 
 				cs.getConstructionSiteAdress().getStreetNumber(), 
@@ -99,6 +99,6 @@ public class AdminConstructionSiteController {
 				cs.getBuildingCode(), 
 				cs.getStatus(), 
 				id);
-		return "admin/constructionsite/constructionsites";
+        return "redirect:/admin/construction-sites";
 	}
 }

@@ -23,7 +23,7 @@
 			<div id="table-container">
                 <div id="table-header"> Catalog </div>
                 <div id="searchbox"> 
-                	<sf:form action="/admin/catalog/product" method="post">
+                	<sf:form action="/admin/catalog/product" method="get">
 						<label>Search: </label>
 						<input type="search" name="productName"> <input type="image" src="/img/searchicon.png" title="Search" id="search-icon" >
 					</sf:form>

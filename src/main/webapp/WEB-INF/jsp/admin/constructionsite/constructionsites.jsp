@@ -58,7 +58,7 @@
                         	</c:choose>
                         </td>
                         <td>
-                        <sf:form action="/admin/construction-sites/edit">
+                        <sf:form action="/admin/construction-sites/edit" method="get">
 							<input type="image" src="/img/edit.png" width="20" height="20" title="edit">
 							<input type="hidden" value="${cs.id}" name = "csid">
 						</sf:form>

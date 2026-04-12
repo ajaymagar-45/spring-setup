@@ -7,12 +7,14 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.order.Order;
 import com.rainbowforest.Application.model.order.OrderDetails;
 import com.rainbowforest.Application.service.order.OrderDetailsService;
 import com.rainbowforest.Application.service.order.OrderService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Secured(value = {"ROLE_ADMIN"})
@@ -39,13 +41,16 @@ public class AdminOrderController {
 		model.addAttribute("orderDetails", orderDetails);
 		return "admin/order/orderdetails";
 	}
-	
 
-	@RequestMapping("/admin/orders/update-status")
-	public String updateStatus(@RequestParam("orderId") int orderId, @RequestParam("status") int status) {
-		orderService.updateOrderStatus(status, orderId);
-		return "admin/order/orders";
-	}
+
+    @PostMapping("/admin/orders/update-status")  // Explicit POST
+    public String updateStatus(@RequestParam("orderId") int orderId,
+                               @RequestParam("status") int status,
+                               RedirectAttributes redirectAttributes) {  // Add this
+        orderService.updateOrderStatus(status, orderId);
+        redirectAttributes.addFlashAttribute("message", "Status updated successfully!");
+        return "redirect:/admin/orders";  // ✅ REDIRECT - safe refresh
+    }
 	
 
 	@GetMapping("/admin/orders/history")

@@ -23,7 +23,7 @@
             </div>
             <sf:form action = "/login" method = "post">
             	<input type="text" name = "userName" placeholder="Username" autofocus>
-                <input type="password" name = "userPassword" placeholder="Password" autofocus>
+                <input type="password" name = "userPassword" placeholder="userPassword" autofocus>
                 <input type="submit" value="LOGIN">    
             </sf:form>
     	</div>

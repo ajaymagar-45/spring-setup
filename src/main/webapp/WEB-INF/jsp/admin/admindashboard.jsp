@@ -9,8 +9,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv = "X-UA-Compatible" content = "IE = edge,chrome=1"/>
-	<link rel="stylesheet" href= "css/style.css" type="text/css"/>
-	<link rel="stylesheet" href="css/admindashboard.css" type="text/css">
+	<link rel="stylesheet" href= "/css/style.css" type="text/css"/>
+	<link rel="stylesheet" href="/css/admindashboard.css" type="text/css">
 </head>
 <body>
 	<div id="container">
@@ -28,13 +28,13 @@
                 </div>
                 <div class="panel-content">
                     <div class="panel-tiles">
-                        <a href="admin/user-form">Add New</a>
+                        <a href="/admin/user-form">Add New</a>
                     </div><br>
                     <div class="panel-tiles">
-                        <a href="admin/users">Search Account</a>
+                        <a href="/admin/users">Search Account</a>
                     </div><br>
                     <div class="panel-tiles">
-                        <a href="admin/security">Security</a>
+                        <a href="/admin/security">Security</a>
                     </div>  
                 </div> 
             </div>
@@ -47,13 +47,13 @@
                 </div>
                 <div class="panel-content">
                     <div class="panel-tiles">
-                        <a href="admin/cs-form">Add New</a>
+                        <a href="/admin/cs-form">Add New</a>
                     </div><br>
                     <div class="panel-tiles">
-                        <a href="admin/construction-sites">Search</a>
+                        <a href="/admin/construction-sites">Search</a>
                     </div><br>
                     <div class="panel-tiles">
-                        <a href="admin/construction-site/stock-list">Stock List</a>
+                        <a href="/admin/construction-site/stock-list">Stock List</a>
                     </div><br>
                 </div>
             </div>
@@ -65,10 +65,10 @@
                 </div>
                 <div class="panel-content">
                     <div class="panel-tiles">
-                        <a href="admin/catalog/add-item">Add New Item</a>
+                        <a href="/admin/catalog/add-item">Add New Item</a>
                     </div><br>
                     <div class="panel-tiles">
-                        <a href="admin/catalog/products">Edit Item</a>
+                        <a href="/admin/catalog/products">Edit Item</a>
                     </div>  
                 </div>
                 
@@ -82,10 +82,10 @@
                 </div>
                <div class="panel-content">
                     <div class="panel-tiles">
-                        <a href="admin/orders">Check Orders</a>
+                        <a href="/admin/orders">Check Orders</a>
                     </div><br>
                     <div class="panel-tiles">
-                        <a href="admin/orders/history">Order History</a>
+                        <a href="/admin/orders/history">Order History</a>
                     </div><br>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                 </div>
                <div class="panel-content">
                     <div class="panel-tiles">
-                        <a href="admin/liabilities">Check Liabilities</a>
+                        <a href="/admin/liabilities">Check Liabilities</a>
                     </div><br>
                 </div>
             </div> 

@@ -46,7 +46,7 @@
 							<td><c:out value="${item.product.productName}"></c:out></td>
 							<td><c:out value="${item.product.productCategory}"></c:out></td>
 							<td>
-								<sf:form action="/cart/update">
+								<sf:form action="/cart/update" method="post">
 									<input type="number" value="<c:out value="${item.quantity}"/>" name="quantity">
 									<input type="hidden" value="${item.product.id}" name = "itemId">
 									<input type="submit" value="upd">
@@ -55,7 +55,7 @@
 							<td><c:out value="${item.product.productPrice}"></c:out></td>
 							<td><c:out value="${item.quantity * item.product.productPrice}"></c:out></td>
 							<td>
-								<sf:form action="/cart/delete-item">
+								<sf:form action="/cart/delete-item" method="post">
 									<input type="image" src="/img/delete.png" width="20" height="20" title="delete">
 									<input type="hidden" value="${item.product.id}" name = "itemId">
 								</sf:form>
@@ -76,7 +76,7 @@
 					</tr>
 					</c:if>
 				</table>
-				<form action="/cart/order">
+				<form action="/cart/order" method="post">
 					<input type="button" onclick="window.location.href = '/catalog';" value="<- BACK"> 
 					<input type="submit" value="NEXT ->">
 				</form>

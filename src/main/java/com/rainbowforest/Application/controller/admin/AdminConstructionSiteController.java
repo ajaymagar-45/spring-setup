@@ -35,27 +35,23 @@ public class AdminConstructionSiteController {
 		model.addAttribute("cs", cs);
 		return "admin/constructionsite/constructionsiteform";
 	}
-	
-	@PostMapping("/admin/save-cs")
-	public String saveCs(@ModelAttribute("cs") ConstructionSite cs, BindingResult result, Model model,  Locale locale) {
-		String returnPage = null;
-		ConstructionSiteValidator validator = new ConstructionSiteValidator();
-		validator.validate(cs, result);
-		model.addAttribute("result", result);
-		if(result.hasErrors()) {
-			model.addAttribute("cs", cs);
-			returnPage = "admin/constructionsite/constructionsiteform";
-		}
-		else {
+    @PostMapping("/admin/save-cs")
+    public String saveCs(@ModelAttribute("cs") ConstructionSite cs,
+                         BindingResult result,
+                         Model model,
+                         Locale locale) {
 
-			constructionSiteService.addConstructionSite(cs);
-			model.addAttribute("message", messageSource.getMessage("cs.save.success", null, locale));
-			model.addAttribute("cs", new ConstructionSite());
-			returnPage = "admin/constructionsite/constructionsiteform";
-		}
+        ConstructionSiteValidator validator = new ConstructionSiteValidator();
+        validator.validate(cs, result);
 
-		return returnPage;
-	}
+        if (result.hasErrors()) {
+            return "admin/constructionsite/constructionsiteform";
+        }
+
+        constructionSiteService.addConstructionSite(cs);
+
+        return "redirect:/admin/construction-sites";
+    }
 
 	@GetMapping("/admin/construction-site/stock-list")
 	public String stockList(Model model) {

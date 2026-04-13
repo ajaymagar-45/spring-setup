@@ -93,23 +93,24 @@ public class AdminUserController {
 		return "admin/user/edituser";
 	}
 
+    @PostMapping("/admin/users/update-user")
+    public String updateDetails(
+            UserAccountDetails user,
+            @RequestParam ("usid") int usid,
+            @RequestParam ("constructionSites") int csid) {
 
-	@PostMapping("/admin/users/update-user")
-	public String updateDetails(
-			UserAccountDetails user, 
-			@RequestParam ("usid") int usid,
-			@RequestParam ("constructionSites") int csid) {
-		userService.updateUserDetails(
-				user.getFirstName(), 
-				user.getLastName(), 
-				user.getEmail(), 
-				user.getPhoneNumber(), 
-				user.getPosition(), 
-				csid, 
-				usid);
-		return "admin/user/users";
-	}
-		
+        userService.updateUserDetails(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNumber(),
+                user.getPosition(),
+                csid,
+                usid);
+
+        return "redirect:/admin/users";
+    }
+
 
 	@GetMapping("/admin/users/user-details")
 	public String userDetails(@RequestParam ("usid") int userId, Model model) {
@@ -141,18 +142,19 @@ public class AdminUserController {
 		model.addAttribute("user", user);
 		return "admin/user/editsecurity";
 	}
-		
 
-	@PostMapping("/admin/security/update")
-	public String updateSecurity(
-			UserAccount user, 
-			@RequestParam("usid") int usid, 
-			@RequestParam("role") int roleId) {
-		userService.securityUpdate(
-			new BCryptPasswordEncoder().encode(user.getUserPassword()), 
-			user.getUserEnabled(),
-			roleId, 
-			usid);
-		return "admin/user/security";
-	}
+    @PostMapping("/admin/security/update")
+    public String updateSecurity(
+            UserAccount user,
+            @RequestParam("usid") int usid,
+            @RequestParam("role") int roleId) {
+
+        userService.securityUpdate(
+                new BCryptPasswordEncoder().encode(user.getUserPassword()),
+                user.getUserEnabled(),
+                roleId,
+                usid);
+
+        return "redirect:/admin/security";
+    }
 }

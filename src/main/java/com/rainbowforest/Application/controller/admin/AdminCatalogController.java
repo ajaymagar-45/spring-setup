@@ -59,7 +59,7 @@ public class AdminCatalogController {
 		return "admin/catalog/products";
 	}
 	
-	@GetMapping("/admin/catalog/edit-item")
+	@PostMapping("/admin/catalog/edit-item")
 	public String editItem(@RequestParam ("itemId") int itemId, Model model) {
 		Product product = productService.findOneProduct(itemId);
 		model.addAttribute("product", product);
@@ -68,13 +68,14 @@ public class AdminCatalogController {
 	
 	@GetMapping("/admin/catalog/product")
 	public String product(@RequestParam ("productName") String productName, Model model) {
-		Product product = productService.findOneProductByName(productName);
-		model.addAttribute("product", product);
-		return "admin/catalog/product";
+        List<Product> products = productService.findByProductName(productName); // ✅ list
+
+        model.addAttribute("products", products); // ✅ plural
+        return "admin/catalog/products";
 	}
 	
 	@PostMapping("/admin/catalog/update-item")
-	public String updateItem(@RequestParam("itemId") int itemId,Product product, Model model) {
+	public String updateItem(@RequestParam("itemId") int itemId,@ModelAttribute Product product, Model model) {
 		
 		productService.updateItem(
 				product.getProductCode(), 
@@ -83,6 +84,6 @@ public class AdminCatalogController {
 				product.getAvailability(), 
 				product.getProductPrice(), 
 				itemId);
-		return "admin/catalog/products";
+        return "redirect:/admin/catalog/products";
 	}
 }

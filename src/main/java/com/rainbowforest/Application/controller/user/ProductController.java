@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.catalog.Product;
 import com.rainbowforest.Application.service.product.ProductService;
 
+import java.util.List;
+
 @Controller
 @Secured (value = {"ROLE_ADMIN", "ROLE_USER"})
 public class ProductController {
@@ -29,7 +31,7 @@ public class ProductController {
 
 	@GetMapping("catalog/search")
 	public String findOneProduct(@RequestParam("productName") String productName, Model model) {
-		Product product = productService.findOneProductByName(productName);
+		List<Product> product = productService.findByProductName(productName);
 		model.addAttribute("product", product);
 		return "user/catalog/product";
 	}

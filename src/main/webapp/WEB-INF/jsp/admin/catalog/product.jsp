@@ -45,7 +45,7 @@
                             <td><c:out value="${product.availability}" /></td>
                             <td><c:out value="${product.productPrice}" /></td>
                             <td>
-                                <form action="/admin/catalog/edit-item" method="get">
+                                <form action="/admin/catalog/edit-item" method="post">
                                     <input type="hidden" value="${product.id}" name="itemId">
                                     <input type="submit" value="Edit">
                                 </form>

@@ -32,18 +32,19 @@ public class AdminUserController {
 	private MessageSource messageSource;
 	
 
-	@GetMapping ("admin/user-form")
+	@GetMapping ("/admin/user-form")
 	public String userForm(Model model) {
 		UserAccountDetails user = new UserAccountDetails();
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
 		model.addAttribute("constructionSiteList", constructionSiteList);
 		model.addAttribute("user", user);
-		return "admin/user/userform";
+        return "admin/user/userform";
 	}
+
 	
 
-	@PostMapping ("admin/save-user")
-	public String saveUser(@ModelAttribute("user") UserAccountDetails user, Model model, BindingResult result, Locale locale) {
+	@PostMapping ("/admin/save-user")
+	public String saveUser( @ModelAttribute("user") UserAccountDetails user,  BindingResult result,Model model, Locale locale) {
 		String returnPage = null;
 		UserAccountDetailsValidator validator = new UserAccountDetailsValidator();
 		UserAccount userExist = userService.findOneByUserName(user.getUserAccount().getUserName()); 
@@ -67,7 +68,7 @@ public class AdminUserController {
 	}
 	
 
-	@GetMapping ("admin/users")
+	@GetMapping ("/admin/users")
 	public String getAllUsers(Model model) {
 		List<UserAccountDetails> users = userService.findAllUsers();
 		model.addAttribute("users", users);
@@ -75,14 +76,15 @@ public class AdminUserController {
 	}
 		
 
-	@PostMapping("admin/users/delete-user")
+	@PostMapping("/admin/users/delete-user")
 	public String deleteUser(@RequestParam ("usid") int userId) {
 		userService.deleteUser(userId);
+        System.out.println("Controller hit");
 		return "redirect:../users";
 	}
 		
 
-	@GetMapping("admin/users/edit-user")
+	@GetMapping("/admin/users/edit-user")
 	public String editUser(@RequestParam ("usid") int userId, Model model) {
 		UserAccountDetails user = userService.findOneById(userId);
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
@@ -91,25 +93,26 @@ public class AdminUserController {
 		return "admin/user/edituser";
 	}
 
+    @PostMapping("/admin/users/update-user")
+    public String updateDetails(
+            UserAccountDetails user,
+            @RequestParam ("usid") int usid,
+            @RequestParam ("constructionSites") int csid) {
 
-	@PostMapping("admin/users/update-user")
-	public String updateDetails(
-			UserAccountDetails user, 
-			@RequestParam ("usid") int usid,
-			@RequestParam ("constructionSites") int csid) {
-		userService.updateUserDetails(
-				user.getFirstName(), 
-				user.getLastName(), 
-				user.getEmail(), 
-				user.getPhoneNumber(), 
-				user.getPosition(), 
-				csid, 
-				usid);
-		return "admin/user/users";
-	}
-		
+        userService.updateUserDetails(
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPhoneNumber(),
+                user.getPosition(),
+                csid,
+                usid);
 
-	@GetMapping("admin/users/user-details")
+        return "redirect:/admin/users";
+    }
+
+
+	@GetMapping("/admin/users/user-details")
 	public String userDetails(@RequestParam ("usid") int userId, Model model) {
 		UserAccountDetails user = userService.findOneById(userId);
 		model.addAttribute("user", user);
@@ -117,7 +120,7 @@ public class AdminUserController {
 	}
 		
 
-	@GetMapping("admin/users/user")
+	@GetMapping("/admin/users/user")
 	public String user(@RequestParam("userName") String userName, Model model) {
 		UserAccount user = userService.findOneByUserName(userName);
 		model.addAttribute("user", user);
@@ -125,7 +128,7 @@ public class AdminUserController {
 	}
 		
 
-	@GetMapping ("admin/security")
+	@GetMapping ("/admin/security")
 	public String security(Model model) {
 		List<UserAccount> users = userService.findAllAccount();
 		model.addAttribute("users", users);
@@ -133,24 +136,25 @@ public class AdminUserController {
 	}
 		
 
-	@GetMapping("admin/security/edit")
+	@GetMapping("/admin/security/edit")
 	public String editSecurity(@RequestParam("usid") int usid, Model model) {
 		UserAccount user = userService.findOneAccountById(usid);
 		model.addAttribute("user", user);
 		return "admin/user/editsecurity";
 	}
-		
 
-	@PostMapping("admin/security/update")
-	public String updateSecurity(
-			UserAccount user, 
-			@RequestParam("usid") int usid, 
-			@RequestParam("role") int roleId) {
-		userService.securityUpdate(
-			new BCryptPasswordEncoder().encode(user.getUserPassword()), 
-			user.getUserEnabled(),
-			roleId, 
-			usid);
-		return "admin/user/security";
-	}
+    @PostMapping("/admin/security/update")
+    public String updateSecurity(
+            UserAccount user,
+            @RequestParam("usid") int usid,
+            @RequestParam("role") int roleId) {
+
+        userService.securityUpdate(
+                new BCryptPasswordEncoder().encode(user.getUserPassword()),
+                user.getUserEnabled(),
+                roleId,
+                usid);
+
+        return "redirect:/admin/security";
+    }
 }

@@ -26,7 +26,7 @@ public interface ProductService {
 	 * @param productName
 	 * @return an object of type Product for the given product name
 	 */
-	Product findOneProductByName(String productName);
+	List<Product> findByProductName(String productName);
 	
 	/**
 	 * Saves a single object of type Product

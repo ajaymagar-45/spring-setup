@@ -24,7 +24,7 @@
 			<div id="table-container">
 				<div id="table-header">Users</div>
 				<div id="searchbox">
-				<sf:form action="/admin/users/user" method="post">
+				<sf:form action="/admin/users/user" method="get">
 					<label>Search: </label>
 					<input type="search" name="userName"> <input type="image" src="/img/searchicon.png" title="Search" id="search-icon" >
 				</sf:form>

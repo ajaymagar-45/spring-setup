@@ -23,7 +23,7 @@
 			<div id="table-container">
                 <div id="table-header"> Catalog </div>
                 <div id="searchbox"> 
-                	<sf:form action="/admin/catalog/product" method="post">
+                	<sf:form action="/admin/catalog/product" method="get">
 						<label>Search: </label>
 						<input type="search" name="productName"> <input type="image" src="/img/searchicon.png" title="Search" id="search-icon" >
 					</sf:form>
@@ -37,19 +37,21 @@
 						<th>price per day</th>
 						<th>Item Details</th>	
                     </tr>
-					<tr>
-						<td><c:out value="${product.productCode}"></c:out></td>
-						<td><c:out value="${product.productName}"></c:out></td>
-						<td><c:out value="${product.productCategory}"></c:out></td>
-						<td><c:out value="${product.availability}"></c:out></td>
-						<td><c:out value="${product.productPrice}"></c:out></td>
-						<sf:form action="/admin/catalog/edit-item">
-							<td>
-								<input type="submit"> 
-								<input type="hidden" value="${product.id}" name="itemId">
-							</td>
-						</sf:form>
-					</tr>
+					<c:forEach var="product" items="${products}">
+                        <tr>
+                            <td><c:out value="${product.productCode}" /></td>
+                            <td><c:out value="${product.productName}" /></td>
+                            <td><c:out value="${product.productCategory}" /></td>
+                            <td><c:out value="${product.availability}" /></td>
+                            <td><c:out value="${product.productPrice}" /></td>
+                            <td>
+                                <form action="/admin/catalog/edit-item" method="post">
+                                    <input type="hidden" value="${product.id}" name="itemId">
+                                    <input type="submit" value="Edit">
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
 				</table>
 			</div>
 		</div>

@@ -8,11 +8,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.rainbowforest.Application.model.catalog.Product;
 
+import java.util.List;
+
 @Repository
 @Transactional
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-	public Product findOneByProductName(String productName);
+	public List<Product> findByProductName(String productName);
 	
 	@Modifying
 	@Query("UPDATE Product p "

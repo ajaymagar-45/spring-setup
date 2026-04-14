@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
@@ -26,7 +27,7 @@ public class AdminLiabilitiesController {
 	@Autowired
 	private OrderService orderService;
 	
-	@GetMapping("admin/liabilities")
+	@GetMapping("/admin/liabilities")
 	public String liabilities(Model model) {
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
 		List<Order> orders = orderService.findAllOrders();
@@ -36,7 +37,7 @@ public class AdminLiabilitiesController {
 		return "admin/liabilities/liabilities";
 	}
 	
-	@GetMapping("admin/liabilities/details")
+	@GetMapping("/admin/liabilities/details")
 	public String liabilitiesDetails(@RequestParam("csId") int csId, Model model) {
 		List<Order> orders = orderService.findAllOrderByConstructionSiteId(csId);
 		model.addAttribute("orders", orders);

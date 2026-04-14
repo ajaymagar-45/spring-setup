@@ -23,10 +23,11 @@
 			<div id="table-container">
                 <div id="table-header"> Catalog </div>
                 <div id="searchbox"> 
-                	<sf:form action="/admin/catalog/product" method="post">
-						<label>Search: </label>
-						<input type="search" name="productName"> <input type="image" src="/img/searchicon.png" title="Search" id="search-icon" >
-					</sf:form>
+                	<form action="/admin/catalog/product" method="get">  <!-- Plain form -->
+                        <label>Search: </label>
+                        <input type="search" name="productName">
+                        <button type="submit">Search</button>
+                    </form>
                 </div>
                 <table>
                     <tr>
@@ -39,16 +40,14 @@
                     </tr>
 						<c:forEach var="order" items="${orders}">
 							<tr>
-								<c:if test="${order.status != 2}">
+							<c:if test="${not empty order.status and order.status != 2}">
 								<td><c:out value="${order.constructionSite.buildingName}"></c:out></td>
 								<td><c:out value="${order.orderingParty}"></c:out></td>
 								<td><c:out value="${order.totalPrice}"></c:out></td>
 								<td><c:out value="${order.date}"></c:out></td>
-								<sf:form action="/admin/orders/details">
-								<td><input type="submit"> 
-								<input type="hidden" value="${order.orderDetails.id}" name="orderDetailsId"></td>
-								</sf:form>
 								<td>
+                                    <a href="/admin/orders/details?orderDetailsId=${order.orderDetails.id}">Details</a>
+                                </td>
 									<sf:form action="/admin/orders/update-status">
 									<select name="status">
 										<option value="0">Processed</option>

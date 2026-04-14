@@ -20,5 +20,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer>{
 	public List<Order> findAllOrderByConstructionSiteId(int csId);
 	
 	@Query("SELECT o FROM Order o WHERE o.orderingParty = :userName")
-	public List<Order> getAllOrdersByUserName(@Param("userName") String userName);	
+	public List<Order> getAllOrdersByUserName(@Param("userName") String userName);
+    @Query("SELECT o FROM Order o LEFT JOIN FETCH o.constructionSite")
+    List<Order> findAllWithConstructionSite();
 }

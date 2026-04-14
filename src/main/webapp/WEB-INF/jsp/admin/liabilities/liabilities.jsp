@@ -23,7 +23,7 @@
 			<div id="table-container">
                 <div id="table-header"> Catalog </div>
                 <div id="searchbox"> 
-                	<sf:form action="/admin/catalog/product" method="post">
+                	<sf:form action="/admin/catalog/product" method="get">
 						<label>Search: </label>
 						<input type="search" name="productName"> <input type="image" src="/img/searchicon.png" title="Search" id="search-icon" >
 					</sf:form>
@@ -43,11 +43,10 @@
 								<c:out value="${liabilities.value}"/>
 								</c:if>
 								</c:forEach>
-								</td>
-								<sf:form action="/admin/liabilities/details">
-								<td><input type="submit"> 
-								<input type="hidden" value="${cs.id}" name="csId"></td>
-								</sf:form>
+								<!-- Replace sf:form with plain link -->
+                                <td>
+                                    <a href="/admin/liabilities/details?csId=${cs.id}">Details</a>
+                                </td>
 							</tr>
 						</c:forEach>
 				</table>

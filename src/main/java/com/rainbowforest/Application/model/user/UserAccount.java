@@ -1,5 +1,7 @@
 package com.rainbowforest.Application.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"userAccountDetails", "hibernateLazyInitializer", "handler"})
 public class UserAccount {
 
 	@Id

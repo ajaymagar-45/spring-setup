@@ -1,5 +1,8 @@
 package com.rainbowforest.Application.model.constructionSite;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rainbowforest.Application.model.order.Order;
 import com.rainbowforest.Application.model.user.UserAccountDetails;
 import java.util.List;
@@ -17,6 +20,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "construction_site")
+@JsonIgnoreProperties({"constructionSite", "hibernateLazyInitializer", "handler"})
 public class ConstructionSite {
 
 	@Id
@@ -36,6 +40,7 @@ public class ConstructionSite {
 	private ConstructionSiteAdress constructionSiteAdress;
 
 	@OneToMany(mappedBy = "constructionSites")
+	@JsonManagedReference
 	private List<UserAccountDetails> userAccountDetails;
 	
 	@OneToMany(mappedBy = "constructionSite")

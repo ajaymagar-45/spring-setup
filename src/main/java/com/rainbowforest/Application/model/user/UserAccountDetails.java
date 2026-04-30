@@ -11,10 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 
 @Entity
 @Table(name = "users_details")
+@JsonIgnoreProperties({"userAccount", "hibernateLazyInitializer", "handler"})
 public class UserAccountDetails {
 
 	@Id
@@ -37,6 +42,7 @@ public class UserAccountDetails {
 
 	@ManyToOne (cascade = {CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "construction_site_id", nullable = true)
+	@JsonBackReference
 	private ConstructionSite constructionSites;
 
 	@OneToOne(cascade = CascadeType.ALL)

@@ -11,10 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 
 @Entity
 @Table (name = "orders")
+@JsonIgnoreProperties({"orderDetails", "hibernateLazyInitializer", "handler"})
 public class Order {
 
 	@Id

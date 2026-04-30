@@ -1,4 +1,4 @@
-    package com.rainbowforest.Application.controller.admin;
+    package com.rainbowforest.Application.controller;
 
 
     import org.springframework.security.access.annotation.Secured;

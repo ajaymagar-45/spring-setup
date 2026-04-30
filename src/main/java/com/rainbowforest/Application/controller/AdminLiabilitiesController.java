@@ -1,4 +1,4 @@
-package com.rainbowforest.Application.controller.admin;
+package com.rainbowforest.Application.controller;
 
 import java.util.List;
 import java.util.Map;

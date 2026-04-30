@@ -14,6 +14,7 @@ import com.rainbowforest.Application.repository.UserAccountRepository;
 
 @Service
 @Transactional
+
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -47,8 +48,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addUserDetails(UserAccountDetails userDetails) {
-		userDetails.getUserAccount().setUserPassword(new BCryptPasswordEncoder().encode(userDetails.getUserAccount().getUserPassword()));
-		userDetailsRepository.save(userDetails);
+		if (userDetails.getUserAccount() != null && userDetails.getUserAccount().getUserPassword() != null) {
+			userDetails.getUserAccount().setUserPassword(new BCryptPasswordEncoder().encode(userDetails.getUserAccount().getUserPassword()));
+		}
+		userDetailsRepository.save(userDetails);  // Save details independently
 	}
 
 	@Override

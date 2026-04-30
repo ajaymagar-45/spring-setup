@@ -25,7 +25,7 @@ public class OrderController {
 	@Autowired
 	private OrderDetailsService orderDetailsService;
 	
-	@GetMapping("orders")
+	@GetMapping("/orders")
 	public String orders(Model model) {
 		String userName = UserUtilities.getLoggedUser();
 		List<Order> orders = orderService.getAllOrdersByUserName(userName);
@@ -34,7 +34,7 @@ public class OrderController {
 	}
 	
 
-	@GetMapping("orders/details")
+	@GetMapping("/orders/details")
 	public String orderDetails(@RequestParam("orderDetailsId") int orderDetailsId, Model model) {
 		OrderDetails orderDetails = orderDetailsService.findOneOrderDetailsById(orderDetailsId);
 		model.addAttribute("orderDetails", orderDetails);

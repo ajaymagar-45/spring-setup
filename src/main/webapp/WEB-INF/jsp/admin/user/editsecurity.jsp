@@ -14,11 +14,11 @@
 </head>
 <body>
 	<div id="container">
-		<%@include file="/WEB-INF/incl/header.app"%>
+		<%@include file="/WEB-INF/incl/header.jsp"%>
 		<div id="bar4">
 			<a href="/">Home </a><label>></label><a href="/admin"> Admin Dashboard</a><label>></label><a href="#"> Search Users</a>
 		</div>
-		<%@include file="/WEB-INF/incl/navigation.app"%>
+		<%@include file="/WEB-INF/incl/navigation.jsp"%>
 		<div id="bar3"></div>
 		<div id="main-content">
 			<div id="table-container">
@@ -69,7 +69,7 @@
 								<td></td>
 								<td>
 									<div class="sec-inputs">
-										<sf:radiobutton path="role" value="2"/>	
+										<sf:radiobutton path="role" value="2"/>
 										<label>User</label>
 									</div>
 								</td>

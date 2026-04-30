@@ -84,7 +84,7 @@ public class AdminUserController {
 	}
 		
 
-	@GetMapping("/admin/users/edit-user")
+	@PostMapping("/admin/users/edit-user")
 	public String editUser(@RequestParam ("usid") int userId, Model model) {
 		UserAccountDetails user = userService.findOneById(userId);
 		List<ConstructionSite> constructionSiteList = constructionSiteService.findAllConstructionSite();
@@ -96,8 +96,8 @@ public class AdminUserController {
     @PostMapping("/admin/users/update-user")
     public String updateDetails(
             UserAccountDetails user,
-            @RequestParam ("usid") int usid,
-            @RequestParam ("constructionSites") int csid) {
+            @RequestParam ("usid") Integer usid,
+            @RequestParam ("constructionSites") Integer csid) {
 
         userService.updateUserDetails(
                 user.getFirstName(),
@@ -136,7 +136,7 @@ public class AdminUserController {
 	}
 		
 
-	@GetMapping("/admin/security/edit")
+	@PostMapping("/admin/security/edit")
 	public String editSecurity(@RequestParam("usid") int usid, Model model) {
 		UserAccount user = userService.findOneAccountById(usid);
 		model.addAttribute("user", user);

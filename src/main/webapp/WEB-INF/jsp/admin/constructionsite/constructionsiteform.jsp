@@ -5,85 +5,176 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
+
 <html>
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE = edge,chrome=1" />
-	<link rel="stylesheet" href="/css/style.css" type="text/css" />
-	<link rel="stylesheet" href="/css/edituser.css" type="text/css">
-	<link rel="stylesheet" href="/css/errorsbar.css" type="text/css">
-	<link rel="stylesheet" href="/css/messagesbar.css" type="text/css">
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Add Construction Site</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Sora', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* Navbar */
+.navbar {
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,0.25);
+}
+
+/* Card */
+.page-card {
+    max-width: 900px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 30px;
+    color: white;
+}
+
+/* Inputs */
+.form-control {
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.12);
+    box-shadow: none;
+    color: white;
+}
+
+/* Labels */
+label {
+    color: #ccc;
+}
+
+/* Buttons */
+.btn-save {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    border: none;
+    color: black;
+    border-radius: 10px;
+    padding: 0.5rem 1.2rem;
+}
+
+.btn-cancel {
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5rem 1.2rem;
+}
+
+/* Message */
+.message-box {
+    color: #00f2fe;
+    margin-bottom: 15px;
+}
+</style>
+
 </head>
+
 <body>
-	<div id="container">
-		<%@include file="/WEB-INF/incl/header.app"%>
-		<div id="bar4">
-			<a href="/">Home </a><label>></label><a href="/admin"> Admin Dashboard </a><label>></label><a href="#"> Add Construction Site</a>
-		</div>
-		<%@include file="/WEB-INF/incl/navigation.app"%>
-		<div id="bar3"></div>
-		<div id="main-content">
-			<div class="messagebar">
-				<c:out value="${message}"/>
-			</div>
-			<c:if test="${result != null }">
-				<sf:form modelAttribute="cs" id="error-form">
-					<sf:errors path="*" />
-				</sf:form>
-			</c:if>
-			<div id="table-container">
-				<sf:form action="/admin/save-cs" modelAttribute="cs" method="post">
-					<div id="table-header">
-						<label>Add New Construction Site</label>
-					</div>
-					<div id="info-form">
-						<table>
-							<div class="label">
-								<label>Construction Site Information</label>
-								<div class="separator"></div>
-							</div>
-							<tr>
-								<td>Building name</td>
-								<td><sf:input path="buildingName" type="text" /></td>
-							</tr>
-							<tr>
-								<td>Building code</td>
-								<td><sf:input path="buildingCode" type="text" /></td>
-							</tr>
-							<tr>
-								<td>Street</td>
-								<td><sf:input path="constructionSiteAdress.street" type="text" /></td>
-							</tr>
-							<tr>
-								<td>Street number</td>
-								<td><sf:input path="constructionSiteAdress.streetNumber" type="text" /></td>
-							</tr>
-							<tr>
-								<td>Locality</td>
-								<td><sf:input path="constructionSiteAdress.locality" type="text" /></td>
-							</tr>
-							<tr>
-								<td>Zip Code</td>
-								<td><sf:input path="constructionSiteAdress.zipCode" type="text" /></td>
-							</tr>
-							<tr>
-								<td>Country</td>
-								<td><sf:input path="constructionSiteAdress.country" type="text" /></td>
-							</tr>
-						</table>
-					</div>
-					<div id="buttonbar">
-						<div class="button">
-							<input type="submit" value="save">
-							<input type="hidden" value="0" name="status" >
-						</div>
-						<div class="button">
-							<input type="button" value="cancel">
-						</div>
-					</div>
-				</sf:form>
-			</div>
-		</div>
-	</div>
+
+<nav class="navbar navbar-dark px-4">
+    <div class="container-fluid">
+        <span class="navbar-brand fw-bold text-white">🚀 SiteManager</span>
+    </div>
+</nav>
+
+<div class="page-card">
+
+
+<!-- Title -->
+<h4 class="mb-3">
+    <i class="bi bi-building"></i> Add Construction Site
+</h4>
+
+<!-- Message -->
+<div class="message-box">
+    <c:out value="${message}"/>
+</div>
+
+<!-- Errors -->
+<c:if test="${result != null}">
+    <div class="alert alert-danger">
+        <sf:errors path="*"/>
+    </div>
+</c:if>
+
+<!-- Form -->
+<sf:form action="/admin/save-cs" modelAttribute="cs" method="post">
+
+    <div class="row g-3">
+
+        <div class="col-md-6">
+            <label>Building Name</label>
+            <sf:input path="buildingName" cssClass="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>Building Code</label>
+            <sf:input path="buildingCode" cssClass="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>Street</label>
+            <sf:input path="constructionSiteAdress.street" cssClass="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>Street Number</label>
+            <sf:input path="constructionSiteAdress.streetNumber" cssClass="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>Locality</label>
+            <sf:input path="constructionSiteAdress.locality" cssClass="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>Zip Code</label>
+            <sf:input path="constructionSiteAdress.zipCode" cssClass="form-control"/>
+        </div>
+
+        <div class="col-md-6">
+            <label>Country</label>
+            <sf:input path="constructionSiteAdress.country" cssClass="form-control"/>
+        </div>
+
+    </div>
+
+    <!-- Hidden status -->
+    <input type="hidden" value="0" name="status">
+
+    <!-- Buttons -->
+    <div class="mt-4 d-flex justify-content-end gap-2">
+
+        <button type="submit" class="btn-save">
+            <i class="bi bi-check-circle"></i> Save
+        </button>
+
+        <a href="/admin" class="btn-cancel">
+            Cancel
+        </a>
+
+    </div>
+
+</sf:form>
+
+
+</div>
+
 </body>
 </html>

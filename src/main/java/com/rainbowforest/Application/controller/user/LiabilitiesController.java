@@ -30,7 +30,7 @@ public class LiabilitiesController {
 	private OrderService orderService;
 	
 
-	@GetMapping("liabilities")
+	@GetMapping("/liabilities")
 	public String liabilities(Model model) {
 		String userName = UserUtilities.getLoggedUser();
 		List<ConstructionSite> constructionSiteList = constructionSiteService.getAllConstructionSiteByUserName(userName);
@@ -39,11 +39,11 @@ public class LiabilitiesController {
 		model.addAttribute("orders", orders);
 		model.addAttribute("constructionSiteList", constructionSiteList);
 		model.addAttribute("liabilitiesMap", liabilitiesMap);
-		return "user/liabilities/liabilities";
+		return "/user/liabilities/liabilities";
 	}
 	
 
-	@GetMapping("liabilities/details")
+	@GetMapping("/liabilities/details")
 	public String liabilitiesDetails(@RequestParam("csId") int csId, Model model) {
 		List<Order> orders = orderService.findAllOrderByConstructionSiteId(csId);
 		model.addAttribute("orders", orders);

@@ -13,11 +13,11 @@
 </head>
 <body>
 	<div id="container">
-		<%@include file="/WEB-INF/incl/header.app"%>
+		<%@include file="/WEB-INF/incl/header.jsp"%>
 		<div id="bar4">
 			<a href="/">Home </a><label>></label><a href="/catalog"> Catalog </a><label>></label><a href="/cart"> Cart </a>
 		</div>
-		<%@include file="/WEB-INF/incl/navigation.app"%>
+		<%@include file="/WEB-INF/incl/navigation.jsp"%>
 		<div id="bar3"></div>
 		<div id="main-content">
 			<div id="table-container">

@@ -33,9 +33,18 @@ public class LiabilitiesUtilities {
 
             for (Order order : orders) {
                 if (order == null) continue;
+
                 ConstructionSite orderCS = order.getConstructionSite();
-                if (orderCS != null && csName.equals(orderCS.getBuildingName()) && order.getStatus() == 0) {
-                    liabilities += order.getTotalPrice();
+
+                if (orderCS != null
+                        && orderCS.getBuildingName() != null
+                        && csName.equals(orderCS.getBuildingName())
+                        && order.getStatus() != null
+                        && order.getStatus() == 0) {
+
+                    if (order.getTotalPrice() != null) {
+                        liabilities += order.getTotalPrice();
+                    }
                 }
             }
             liabilitiesMap.put(csName, liabilities);  // Safe now

@@ -21,7 +21,6 @@ public interface ConstructionSiteRepository extends JpaRepository<ConstructionSi
 			 @Param("newBuildingCode") String newBuildingCode,
 			 @Param("newStatus") Integer newStatus,
 			 @Param("id") Integer id);
-	
-	@Query("SELECT cs FROM ConstructionSite cs INNER JOIN UserAccountDetails ua ON cs.id = ua.id WHERE ua.userAccount.userName = :userName")
-	public List<ConstructionSite> getAllConstructionSiteByUserName(@Param("userName") String userName);
+	@Query("SELECT cs FROM ConstructionSite cs INNER JOIN cs.userAccountDetails ua WHERE ua.userAccount.userName = :userName")
+		public List<ConstructionSite> getAllConstructionSiteByUserName(@Param("userName") String userName);
 }

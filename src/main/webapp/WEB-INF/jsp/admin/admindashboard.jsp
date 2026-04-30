@@ -109,14 +109,14 @@ body {
     <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold">🚀 SiteManager</a>
 
-```
+
     <div class="ms-auto d-flex gap-3">
         <a href="/catalog" class="text-light"><i class="bi bi-grid"></i></a>
         <a href="/orders" class="text-light"><i class="bi bi-cart"></i></a>
         <a href="/logout" class="text-light"><i class="bi bi-box-arrow-right"></i></a>
     </div>
 </div>
-```
+
 
 </nav>
 
@@ -124,7 +124,7 @@ body {
 
 <div class="dashboard-grid">
 
-```
+
 <!-- Users -->
 <div class="dbpanel">
     <div class="panel-header">
@@ -195,7 +195,7 @@ body {
         <a href="/admin/liabilities"><i class="bi bi-graph-up-arrow"></i> View</a>
     </div>
 </div>
-```
+
 
 </div>
 

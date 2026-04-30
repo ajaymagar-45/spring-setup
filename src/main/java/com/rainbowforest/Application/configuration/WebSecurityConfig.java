@@ -20,33 +20,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .passwordEncoder(new BCryptPasswordEncoder())
-//                .usersByUsernameQuery("SELECT user_name , user_password, user_enabled FROM users WHERE user_name=?")
-//                .authoritiesByUsernameQuery("SELECT user_name, user_role FROM users INNER JOIN authorities ON users.user_role_id = authorities.id WHERE user_name=?");
-//
-//
-//    }
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .usersByUsernameQuery(
-                        "SELECT user_name , user_password, user_enabled FROM users WHERE user_name=?")
+                        "SELECT user_name, user_password, user_enabled FROM users WHERE user_name=?")
                 .authoritiesByUsernameQuery(
                         "SELECT user_name, user_role FROM users INNER JOIN authorities ON users.user_role_id = authorities.id WHERE user_name=?");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/resources/**", "/login", "/login?error=true").permitAll()
+        http
+                .authorizeRequests()
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/img/**",
+                        "/login", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -56,20 +46,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("userName")
                 .passwordParameter("userPassword")
                 .permitAll()
-                //.successForwardUrl("/")
-                .and().logout().permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login?logout=true")
+                .permitAll()
                 .and()
                 .csrf().disable();
-
-
     }
 
     @Override
     public void configure(WebSecurity web) {
         web.ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/img/");
-        super.configure(web);
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/img/**");
     }
-
-
 }

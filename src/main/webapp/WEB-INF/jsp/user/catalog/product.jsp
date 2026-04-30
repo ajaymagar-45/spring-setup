@@ -5,7 +5,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-
 <html>
 <head>
 <meta charset="utf-8" />
@@ -15,6 +14,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -33,9 +33,11 @@ body {
 .catalog-card {
     max-width: 1100px;
     margin: 40px auto;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(20px);
     border-radius: 20px;
     padding: 25px;
+    border: 1px solid rgba(255,255,255,0.15);
 }
 
 /* Table */
@@ -45,7 +47,8 @@ body {
 .table th {
     color: #4facfe;
 }
-.table td {
+.table td, .table th {
+    border-color: rgba(255,255,255,0.1) !important;
     vertical-align: middle;
 }
 
@@ -55,7 +58,25 @@ body {
     border: none;
     color: white;
 }
+.search-box input::placeholder {
+    color: rgba(255,255,255,0.5);
+}
 .search-box button {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    border: none;
+}
+
+/* Quantity */
+.qty-input {
+    width: 70px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    text-align: center;
+}
+
+/* Button */
+.btn-cart {
     background: linear-gradient(135deg, #4facfe, #00f2fe);
     border: none;
 }
@@ -65,33 +86,27 @@ body {
 
 <body>
 
-<!-- 🔥 Navbar -->
-
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark px-4">
     <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold">🚀 SiteManager</a>
 
-```
-    <div class="ms-auto d-flex gap-3">
-        <a href="/catalog" class="text-light"><i class="bi bi-grid"></i></a>
-        <a href="/cart" class="text-light"><i class="bi bi-cart"></i></a>
-        <a href="/logout" class="text-light"><i class="bi bi-box-arrow-right"></i></a>
+        <div class="ms-auto d-flex gap-3">
+            <a href="/catalog" class="text-light"><i class="bi bi-grid"></i></a>
+            <a href="/cart" class="text-light"><i class="bi bi-cart"></i></a>
+            <a href="/logout" class="text-light"><i class="bi bi-box-arrow-right"></i></a>
+        </div>
     </div>
-</div>
-```
-
 </nav>
 
-<!-- 🔥 Catalog -->
-
+<!-- Catalog -->
 <div class="catalog-card">
 
-```
 <h4 class="text-white mb-3">
     <i class="bi bi-grid me-2"></i> Catalog
 </h4>
 
-<!-- 🔍 Search -->
+<!-- Search -->
 <sf:form action="/catalog/search" method="post" class="search-box mb-4">
     <div class="input-group">
         <input type="search" name="productName" class="form-control" placeholder="Search product...">
@@ -99,45 +114,47 @@ body {
     </div>
 </sf:form>
 
-<!-- 📊 Table -->
+<!-- Table -->
 <div class="table-responsive">
-    <table class="table table-hover text-center">
-        <thead>
-            <tr>
-                <th>Code</th>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Availability</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Order</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>${product.productCode}</td>
-                <td>${product.productName}</td>
-                <td>${product.productCategory}</td>
-                <td>${product.availability}</td>
-                <td>₹ ${product.productPrice}</td>
+<table class="table table-hover text-center">
 
-                <td>
-                    <input type="number" name="quantity" value="1" class="form-control text-center">
-                </td>
+<thead>
+<tr>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Category</th>
+    <th>Availability</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Order</th>
+</tr>
+</thead>
 
-                <td>
-                    <sf:form action="cart/add">
-                        <input type="hidden" value="${product.productName}" name="productName">
-                        <button type="submit" class="btn btn-success btn-sm">
-                            <i class="bi bi-cart-plus"></i>
-                        </button>
-                    </sf:form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<tbody>
+<tr>
+    <td>${product.productCode}</td>
+    <td>${product.productName}</td>
+    <td>${product.productCategory}</td>
+    <td>${product.availability}</td>
+    <td>₹ ${product.productPrice}</td>
+
+    <td>
+        <input type="number" name="quantity" value="1" class="form-control qty-input mx-auto">
+    </td>
+
+    <td>
+        <sf:form action="cart/add">
+            <input type="hidden" value="${product.productName}" name="productName">
+            <button type="submit" class="btn btn-cart btn-sm">
+                <i class="bi bi-cart-plus"></i>
+            </button>
+        </sf:form>
+    </td>
+</tr>
+</tbody>
+
+</table>
 </div>
-```
 
 </div>
 

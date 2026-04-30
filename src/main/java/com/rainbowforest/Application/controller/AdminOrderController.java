@@ -17,7 +17,7 @@ import com.rainbowforest.Application.service.order.OrderService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@Secured(value = {"ROLE_ADMIN"})
+@Secured(value = {"ROLE_ADMIN","ROLE_USER"})
 public class AdminOrderController {
 
 	@Autowired

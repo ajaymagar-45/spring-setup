@@ -13,11 +13,11 @@
 </head>
 <body>
 	<div id="container">
-		<%@include file="/WEB-INF/incl/header.app"%>
+		<%@include file="/WEB-INF/incl/header.jsp"%>
 		<div id="bar4">
 			<a href="/">Home </a><label>></label><a href="/catalog"> Catalog </a><label>></label><a href="/cart"> Cart </a>
 		</div>
-		<%@include file="/WEB-INF/incl/navigation.app"%>
+		<%@include file="/WEB-INF/incl/navigation.jsp"%>
 		<div id="bar3"></div>
 		<div id="main-content">
 			<div id="table-container">
@@ -43,10 +43,12 @@
 								<td><c:out value="${order.orderingParty}"></c:out></td>
 								<td><c:out value="${order.totalPrice}"></c:out></td>
 								<td><c:out value="${order.date}"></c:out></td>
-								<sf:form action="/admin/orders/details">
-								<td><input type="submit"> 
-								<input type="hidden" value="${order.orderDetails.id}" name="orderDetailsId"></td>
-								</sf:form>
+								<sf:form action="/admin/orders/details" method="get">
+                                    <td>
+                                        <input type="submit" value="Details">
+                                        <input type="hidden" value="${order.orderDetails.id}" name="orderDetailsId">
+                                    </td>
+                                </sf:form>
 								<td>
 									<c:choose>
 										<c:when test="${order.status == 0}">

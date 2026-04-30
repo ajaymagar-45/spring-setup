@@ -100,7 +100,7 @@ body {
     <div class="container-fluid">
         <a class="navbar-brand fw-bold text-white" href="#">🚀 SiteManager</a>
 
-```
+
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -141,7 +141,7 @@ body {
         </ul>
     </div>
 </div>
-```
+
 
 </nav>
 
@@ -151,7 +151,7 @@ body {
     <h1>Welcome to <span>SiteManager</span></h1>
     <p>Manage construction sites, orders and catalog in one place</p>
 
-```
+
 <div class="d-flex justify-content-center gap-3 mt-3">
     <sec:authorize access="hasRole('ADMIN')">
         <a href="/admin" class="btn btn-primary px-4">Admin Dashboard</a>
@@ -159,7 +159,7 @@ body {
     <a href="/orders" class="btn btn-outline-light">Orders</a>
     <a href="/catalog" class="btn btn-outline-light">Catalog</a>
 </div>
-```
+
 
 </div>
 
@@ -168,7 +168,7 @@ body {
 <div class="container mt-5">
     <div class="row g-4 text-center">
 
-```
+
     <sec:authorize access="hasRole('ADMIN')">
         <div class="col-md-3">
             <a href="/admin/users" class="quick-card d-block">
@@ -200,7 +200,7 @@ body {
     </div>
 
 </div>
-```
+
 
 </div>
 

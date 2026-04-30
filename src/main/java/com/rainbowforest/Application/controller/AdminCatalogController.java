@@ -15,7 +15,7 @@ import com.rainbowforest.Application.service.product.ProductService;
 import com.rainbowforest.Application.validators.ProductValidator;
 
 @Controller
-@Secured (value = {"ROLE_ADMIN"})
+@Secured (value = {"ROLE_ADMIN","ROLE_USER"})
 public class AdminCatalogController {
 
 	@Autowired
@@ -59,7 +59,7 @@ public class AdminCatalogController {
 		return "admin/catalog/products";
 	}
 	
-	@PostMapping("/admin/catalog/edit-item")
+	@GetMapping("/admin/catalog/edit-item")
 	public String editItem(@RequestParam ("itemId") int itemId, Model model) {
 		Product product = productService.findOneProduct(itemId);
 		model.addAttribute("product", product);

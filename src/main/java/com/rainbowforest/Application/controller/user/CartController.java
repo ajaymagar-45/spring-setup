@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 
+import com.rainbowforest.Application.model.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -37,17 +38,22 @@ public class CartController {
 	private  OrderDetailsService orderDetailsService;
 	
 
-	@GetMapping("cart")
+	@GetMapping("/cart")
 	public String cart(HttpSession session, Model model) {
 		@SuppressWarnings("unchecked")
+
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
+		if (cart == null) {
+			cart = new ArrayList<>();
+			session.setAttribute("cart", cart);
+		}
 		double totalPrice = OrderUtilities.getTotalPrice(cart);
 		model.addAttribute("totalPrice", totalPrice);
-		return "user/cart/cart";
+		return "/user/cart/cart";
 	}
 	
 
-	@GetMapping("cart/add")
+	@PostMapping("/cart/add")
 	public String order(@RequestParam("itemId") int itemId,@RequestParam("quantity") Integer quantity, Model model, HttpSession session) {
 		if(quantity == null) {
 			quantity = 1;
@@ -72,27 +78,34 @@ public class CartController {
 	}
 
 
-	@PostMapping("cart/delete-item")
+	@PostMapping("/cart/delete-item")
 	public String deleteItemCart(@RequestParam("itemId") int itemId, HttpSession session) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
 		int index = OrderUtilities.isExist(itemId, cart);
-		cart.remove(index);
+		if (index != -1) {
+			cart.remove(index);
+		}
 		session.setAttribute("cart", cart);
 		return "redirect:../cart";
 	}
 	
-	@PostMapping("cart/update")
+	@PostMapping("/cart/update")
 	public String updateItem(@RequestParam("itemId") int itemId,@RequestParam("quantity") Integer quantity, HttpSession session) {
-		@SuppressWarnings("unchecked")
+
+		if (quantity == null || quantity <= 0) {
+			quantity = 1;
+		}
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
 		int index = OrderUtilities.isExist(itemId, cart);
-		cart.get(index).setQuantity(quantity);
+		if (index != -1) {
+			cart.get(index).setQuantity(quantity);
+		}
 		session.setAttribute("cart", cart);
 		return "redirect:../cart";
 	}
 	
-	@PostMapping ("cart/order")
+	@PostMapping ("/cart/order")
 	public String order(HttpSession session, Model model) {
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
@@ -105,12 +118,19 @@ public class CartController {
 		model.addAttribute("cart", cart);
 		return "user/order/orderform";
 	}
-	
+
 
 	@PostMapping("cart/order/save")
 	public String saveOrder(HttpSession session, OrderDetails orderDetails) {
+		if (orderDetails.getOrder() == null) {
+			orderDetails.setOrder(new Order());
+		}
 		@SuppressWarnings("unchecked")
 		List<Item> cart = (List<Item>)session.getAttribute("cart");
+		if (cart == null) {
+			cart = new ArrayList<>();
+			session.setAttribute("cart", cart);
+		}
 		List<Item> items = new ArrayList<Item>();
 		for(int i = 0; i < cart.size(); i++) {
 			Item item = new Item();
@@ -123,6 +143,8 @@ public class CartController {
 		orderDetails.getOrder().setOrderingParty(UserUtilities.getLoggedUser());
 		orderDetails.setItems(items);
 		orderDetailsService.saveOrder(orderDetails);
-		return "user/catalog/catalog";
+
+		return "redirect:/catalog";
 	}
+
 }

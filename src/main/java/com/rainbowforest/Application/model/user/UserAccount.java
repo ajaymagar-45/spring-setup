@@ -16,13 +16,13 @@ public class UserAccount {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	@Column(name = "user_name")
 	private String userName;
 	@Column(name = "user_password")
 	private String userPassword;
 	@Column(name = "user_enabled")
-	private int userEnabled;
+	private Integer userEnabled;
 
 	@ManyToOne 
 	@JoinColumn(name = "user_role_id")
@@ -31,11 +31,11 @@ public class UserAccount {
 	@OneToOne (mappedBy = "userAccount")
 	private UserAccountDetails userAccountDetails;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -55,11 +55,11 @@ public class UserAccount {
 		this.userPassword = userPassword;
 	}
 
-	public int getUserEnabled() {
+	public Integer getUserEnabled() {
 		return userEnabled;
 	}
 
-	public void setUserEnabled(int userEnabled) {
+	public void setUserEnabled(Integer userEnabled) {
 		this.userEnabled = userEnabled;
 	}
 

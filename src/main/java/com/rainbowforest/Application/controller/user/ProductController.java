@@ -29,7 +29,7 @@ public class ProductController {
 	}
 	
 
-	@GetMapping("catalog/search")
+	@GetMapping("/catalog/search")
 	public String findOneProduct(@RequestParam("productName") String productName, Model model) {
 		List<Product> product = productService.findByProductName(productName);
 		model.addAttribute("product", product);

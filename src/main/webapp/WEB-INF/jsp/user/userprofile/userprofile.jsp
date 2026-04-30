@@ -83,13 +83,13 @@ body {
     <div class="container-fluid">
         <a class="navbar-brand text-white fw-bold">🚀 SiteManager</a>
 
-```
+
     <div class="ms-auto d-flex gap-3">
         <a href="/admin" class="text-light"><i class="bi bi-speedometer2"></i></a>
         <a href="/logout" class="text-light"><i class="bi bi-box-arrow-right"></i></a>
     </div>
 </div>
-```
+
 
 </nav>
 
@@ -97,7 +97,7 @@ body {
 
 <div class="profile-card">
 
-```
+
 <h4 class="profile-title">
     <i class="bi bi-person-circle me-2"></i> My Profile
 </h4>
@@ -172,7 +172,7 @@ body {
     </div>
 
 </sf:form>
-```
+
 
 </div>
 

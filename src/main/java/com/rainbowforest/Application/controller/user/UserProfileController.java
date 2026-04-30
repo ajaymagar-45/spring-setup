@@ -20,7 +20,7 @@ public class UserProfileController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("my-profile")
+	@GetMapping("/my-profile")
 	public String userProfile(Model model) {
 		String userName = UserUtilities.getLoggedUser();
 		UserAccountDetails userAccountDetails = userService.getLoggedUser(userName); 
@@ -29,7 +29,7 @@ public class UserProfileController {
 	}
 
 
-	@PostMapping("my-profile/update")
+	@PostMapping("/my-profile/update")
 	public String updatePassword(
 			UserAccountDetails user,
 			@RequestParam("oldPassword") String oldPassword, 

@@ -18,10 +18,10 @@ public class ConstructionSiteController {
 	@Autowired
 	private ConstructionSiteService constructionSiteService;
 	
-	@GetMapping("construction-site")
+	@GetMapping("/construction-site")
 	public String constructionSiteList(Model model) {
 		List<ConstructionSite> cs = constructionSiteService.findAllConstructionSite();
 		model.addAttribute("cs", cs);
-		return "user/constructionsite/constructionsitelist";
+		return "/user/constructionsite/constructionsitelist";
 	}
 }

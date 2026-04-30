@@ -3,6 +3,7 @@ package com.rainbowforest.Application.controller.admin;
 import java.util.List;
 import java.util.Locale;
 
+import com.rainbowforest.Application.model.constructionSite.ConstructionSiteAdress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.access.annotation.Secured;
@@ -17,7 +18,7 @@ import com.rainbowforest.Application.service.order.OrderService;
 import com.rainbowforest.Application.validators.ConstructionSiteValidator;
 
 @Controller
-@Secured (value = {"ROLE_ADMIN"})
+@Secured (value = {"ROLE_ADMIN","ROLE_USER"})
 public class AdminConstructionSiteController {
 
 	@Autowired
@@ -32,6 +33,7 @@ public class AdminConstructionSiteController {
 	@GetMapping("/admin/cs-form")
 	public String csForm(Model model) {
 		ConstructionSite cs = new ConstructionSite();
+		cs.setConstructionSiteAdress(new ConstructionSiteAdress());
 		model.addAttribute("cs", cs);
 		return "admin/constructionsite/constructionsiteform";
 	}
@@ -43,8 +45,14 @@ public class AdminConstructionSiteController {
 
         ConstructionSiteValidator validator = new ConstructionSiteValidator();
         validator.validate(cs, result);
+		if (cs.getConstructionSiteAdress() == null) {
+			cs.setConstructionSiteAdress(new ConstructionSiteAdress());
+		}
 
         if (result.hasErrors()) {
+			result.getAllErrors().forEach(error -> {
+				System.out.println(error);
+			});
             return "admin/constructionsite/constructionsiteform";
         }
 

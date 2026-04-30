@@ -35,6 +35,6 @@ public interface UserAccountDetailsRepository extends JpaRepository<UserAccountD
 	public UserAccountDetails getLoggedUser(@Param("userName") String userName);
 
 	@Modifying
-	@Query("UPDATE UserAccountDetails ud SET ud.userAccount.userPassword = :newPassword WHERE ud.id = :id")
+	@Query("UPDATE UserAccount ua SET ua.userPassword = :newPassword WHERE ua.id = (SELECT ud.userAccount.id FROM UserAccountDetails ud WHERE ud.id = :id)")
 	public void updatePassword(@Param("newPassword") String newPassword, @Param("id") int id);
 }

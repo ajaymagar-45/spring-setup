@@ -7,6 +7,9 @@ public interface ConstructionSiteService {
 	public ConstructionSite findOneCsById(int id);
 	public List<ConstructionSite> findAllConstructionSite();
 	public void addConstructionSite(ConstructionSite constructionSite);
+
+	ConstructionSite findOneCsById(Integer id);
+
 	public void updateConstructionSiteAdress(
 			 String newStreet,			  	
 			 String newStreetNumber,
@@ -22,4 +25,6 @@ public interface ConstructionSiteService {
 			 Integer id);
 	 
 	 public List<ConstructionSite> getAllConstructionSiteByUserName(String userName);
+
+    ConstructionSite findById(Integer id);
 }

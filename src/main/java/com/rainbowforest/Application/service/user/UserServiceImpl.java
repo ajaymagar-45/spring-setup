@@ -2,6 +2,8 @@ package com.rainbowforest.Application.service.user;
 
 import java.util.List;
 
+import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
+import com.rainbowforest.Application.service.constructionsite.ConstructionSiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserAccountDetailsRepository userDetailsRepository;
+
+	private ConstructionSiteService constructionSiteService;
 
 	@Override
 	public List<UserAccountDetails> findAllUsers() {
@@ -48,11 +52,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addUserDetails(UserAccountDetails userDetails) {
+		// Handle password encoding
 		if (userDetails.getUserAccount() != null && userDetails.getUserAccount().getUserPassword() != null) {
-			userDetails.getUserAccount().setUserPassword(new BCryptPasswordEncoder().encode(userDetails.getUserAccount().getUserPassword()));
+			userDetails.getUserAccount().setUserPassword(
+					new BCryptPasswordEncoder().encode(userDetails.getUserAccount().getUserPassword())
+			);
 		}
-		userDetailsRepository.save(userDetails);  // Save details independently
+
+		// Handle detached ConstructionSite entity
+		if (userDetails.getConstructionSites() != null && userDetails.getConstructionSites().getId() > 0) {
+			ConstructionSite managedSite = constructionSiteService.findById(userDetails.getConstructionSites().getId());
+			userDetails.setConstructionSites(managedSite);
+		}
+
+		userDetailsRepository.save(userDetails);
 	}
+
 
 	@Override
 	public void updateUserDetails(

@@ -19,8 +19,7 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	private int id;
+	private Integer id;
 	@Column(name = "code")
 	private String productCode;
 	@Column(name = "name")
@@ -35,11 +34,11 @@ public class Product {
 	@OneToMany
 	private List<Item> items;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

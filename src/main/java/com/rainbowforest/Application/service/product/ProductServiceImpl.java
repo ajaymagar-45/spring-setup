@@ -54,4 +54,9 @@ public class ProductServiceImpl implements ProductService {
 				newProductPrice, 
 				id);		
 	}
+
+	@Override
+	public Product findById(Integer id) {
+		return null;
+	}
 }

@@ -25,15 +25,14 @@ public class ConstructionSite {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	private int id;
+	private Integer id;
 
 	@Column(name = "building_name")
 	private String buildingName;
 	@Column(name = "building_code")
 	private String buildingCode;
 	@Column (name = "status")
-	private int status;
+	private Integer status;
 
 	@OneToOne (cascade = CascadeType.ALL)
 	@JoinColumn(name = "ConstructionSiteAdress_id", referencedColumnName = "id")
@@ -44,13 +43,14 @@ public class ConstructionSite {
 	private List<UserAccountDetails> userAccountDetails;
 	
 	@OneToMany(mappedBy = "constructionSite")
+	@JsonBackReference
 	private List<Order> orders;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -32,6 +32,7 @@ public class ConstructionSiteRestController {
         return ResponseEntity.ok(constructionSiteService.getAllConstructionSiteByUserName(userName));
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<ConstructionSite> getOne(@PathVariable int id) {
         ConstructionSite cs = constructionSiteService.findOneCsById(id);

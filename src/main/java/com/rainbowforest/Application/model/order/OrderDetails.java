@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import com.rainbowforest.Application.model.catalog.Item;
+import com.rainbowforest.Application.model.catalog.Product;
+import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 
 @Entity
 @Table(name = "order_details")
@@ -83,4 +85,24 @@ public class OrderDetails {
 	public void setItems(List<Item> items) {
 		this.items = items;
 	}
+
+    public ConstructionSite getConstructionSite() {
+				return null;
+    }
+
+    public void setConstructionSite(ConstructionSite managedSite) {
+
+    }
+
+    public OrderDetails[] getOrderItems() {
+        return null;
+    }
+
+    public ConstructionSite getProduct() {
+        return null;
+    }
+
+    public void setProduct(Product managedProduct) {
+
+    }
 }

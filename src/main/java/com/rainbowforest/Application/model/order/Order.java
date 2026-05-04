@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 
 @Entity
@@ -32,8 +33,9 @@ public class Order {
 	@Column (name = "ordering_party")
 	private String orderingParty;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne (cascade = CascadeType.MERGE)
 	@JoinColumn(name = "construction_site_id")
+	@JsonManagedReference
 	private ConstructionSite constructionSite;
 
 	@OneToOne (mappedBy = "order")

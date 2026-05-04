@@ -52,4 +52,6 @@ public interface ProductService {
 			int newAvailability,
 			double newProductPrice,
 			int id);
+
+    Product findById(Integer id);
 }

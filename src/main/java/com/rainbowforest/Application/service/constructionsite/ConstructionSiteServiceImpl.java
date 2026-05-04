@@ -24,13 +24,18 @@ public class ConstructionSiteServiceImpl implements ConstructionSiteService {
 	}
 
 	@Override
+	public ConstructionSite findOneCsById(int id) {
+		return null;
+	}
+
+	@Override
 	public List<ConstructionSite> findAllConstructionSite() {
 		List<ConstructionSite> constructionsSiteList = constructionSiteRepository.findAll();
 		return constructionsSiteList;
 	}
 	
 	@Override
-	public ConstructionSite findOneCsById(int id) {
+	public ConstructionSite findOneCsById(Integer id) {
 		ConstructionSite cs = constructionSiteRepository.getOne(id);
 		return cs;
 	}
@@ -51,5 +56,10 @@ public class ConstructionSiteServiceImpl implements ConstructionSiteService {
 	public List<ConstructionSite> getAllConstructionSiteByUserName(String userName) {
 		List<ConstructionSite> cs = constructionSiteRepository.getAllConstructionSiteByUserName(userName);
 		return cs;
+	}
+
+	@Override
+	public ConstructionSite findById(Integer id) {
+		return null;
 	}
 }

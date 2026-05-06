@@ -7,6 +7,7 @@ import com.rainbowforest.Application.model.user.UserRole;
 import com.rainbowforest.Application.service.constructionsite.ConstructionSiteService;
 import com.rainbowforest.Application.service.user.UserService;
 import com.rainbowforest.Application.utilities.UserUtilities;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -43,13 +44,10 @@ UserRestController {
     }
 
     @GetMapping("/me")
-    @Secured({"ROLE_ADMIN", "ROLE_USER"})
-    public ResponseEntity<UserAccountDetails> getMe() {
-        String userName = UserUtilities.getLoggedUser();
-        UserAccountDetails u = userService.getLoggedUser(userName);
-        return u != null ? ResponseEntity.ok(u) : ResponseEntity.notFound().build();
+    public ResponseEntity<User> me() {
+        User user = userService.getCurrentUser();
+        return ResponseEntity.ok(user);
     }
-
     @GetMapping("/account")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<UserAccount> getByUsername(@RequestParam String userName) {

@@ -1,6 +1,7 @@
 package com.rainbowforest.Application.model.constructionSite;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.rainbowforest.Application.model.order.Order;
@@ -43,7 +44,7 @@ public class ConstructionSite {
 	private List<UserAccountDetails> userAccountDetails;
 	
 	@OneToMany(mappedBy = "constructionSite")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Order> orders;
 	
 	public Integer getId() {

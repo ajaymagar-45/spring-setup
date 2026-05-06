@@ -3,6 +3,7 @@ package com.rainbowforest.Application.service.user;
 import java.util.List;
 import com.rainbowforest.Application.model.user.UserAccount;
 import com.rainbowforest.Application.model.user.UserAccountDetails;
+import org.apache.catalina.User;
 
 public interface UserService {
 	
@@ -115,4 +116,7 @@ public interface UserService {
 			Integer newUserEnabled, 
 			Integer newRoleId, 
 			Integer id);
+
+
+	User getCurrentUser();
 }

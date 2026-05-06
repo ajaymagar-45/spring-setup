@@ -47,6 +47,7 @@ public class UserAccountDetails {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@JsonManagedReference
 	private UserAccount userAccount;
 
 	public int getId() {

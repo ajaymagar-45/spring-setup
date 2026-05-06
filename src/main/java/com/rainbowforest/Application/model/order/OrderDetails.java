@@ -1,16 +1,7 @@
 package com.rainbowforest.Application.model.order;
 
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import com.rainbowforest.Application.model.catalog.Item;
 import com.rainbowforest.Application.model.catalog.Product;
@@ -22,87 +13,52 @@ public class OrderDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	private int id;
+	private Integer id;
+
 	@Column(name = "first_name")
 	private String firstName;
+
 	@Column(name = "last_name")
 	private String lastName;
+
 	@Column(name = "email")
 	private String email;
 
-	@OneToOne (cascade = CascadeType.ALL)
-	@JoinColumn(name = "order_id", referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "order_id")
 	private Order order;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Item> items;
+	@OneToMany(mappedBy = "orderDetails", cascade = CascadeType.ALL)
+	private List<Item> orderItems;
 
-	public int getId() {
-		return id;
-	}
+	@ManyToOne
+	@JoinColumn(name = "construction_site_id")
+	private ConstructionSite constructionSite;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	// ===== GETTERS & SETTERS =====
 
-	public String getFirstName() {
-		return firstName;
-	}
+	public Integer getId() { return id; }
+	public void setId(Integer id) { this.id = id; }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+	public String getFirstName() { return firstName; }
+	public void setFirstName(String firstName) { this.firstName = firstName; }
 
-	public String getLastName() {
-		return lastName;
-	}
+	public String getLastName() { return lastName; }
+	public void setLastName(String lastName) { this.lastName = lastName; }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+	public String getEmail() { return email; }
+	public void setEmail(String email) { this.email = email; }
 
-	public String getEmail() {
-		return email;
-	}
+	public Order getOrder() { return order; }
+	public void setOrder(Order order) { this.order = order; }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	public List<Item> getOrderItems() { return orderItems; }
+	public void setOrderItems(List<Item> orderItems) { this.orderItems = orderItems; }
 
-	public Order getOrder() {
-		return order;
-	}
+	public ConstructionSite getConstructionSite() { return constructionSite; }
+	public void setConstructionSite(ConstructionSite constructionSite) { this.constructionSite = constructionSite; }
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
-
-	public List<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
-	}
-
-    public ConstructionSite getConstructionSite() {
-				return null;
-    }
-
-    public void setConstructionSite(ConstructionSite managedSite) {
-
-    }
-
-    public OrderDetails[] getOrderItems() {
-        return null;
-    }
-
-    public ConstructionSite getProduct() {
-        return null;
-    }
-
-    public void setProduct(Product managedProduct) {
+    public void setItems(List<Item> items) {
 
     }
 }

@@ -1,16 +1,9 @@
 package com.rainbowforest.Application.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -31,7 +24,8 @@ public class UserAccount {
 	@JoinColumn(name = "user_role_id")
 	private UserRole role;
 
-	@OneToOne (mappedBy = "userAccount")
+	@OneToOne (mappedBy = "userAccount" , fetch = FetchType.LAZY)
+	@JsonIgnore
 	private UserAccountDetails userAccountDetails;
 
 	public Integer getId() {

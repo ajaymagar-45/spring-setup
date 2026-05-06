@@ -1,4 +1,4 @@
-    package com.rainbowforest.Application.controller;
+    package com.rainbowforest.Application.controller.admin;
 
     import org.springframework.stereotype.Controller;
     import org.springframework.web.bind.annotation.RequestMapping;

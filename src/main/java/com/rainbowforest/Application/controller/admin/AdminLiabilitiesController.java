@@ -1,4 +1,4 @@
-package com.rainbowforest.Application.controller;
+package com.rainbowforest.Application.controller.admin;
 
 import java.util.List;
 import java.util.Map;
@@ -8,8 +8,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 import com.rainbowforest.Application.model.order.Order;

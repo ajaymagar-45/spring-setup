@@ -1,5 +1,6 @@
 package com.rainbowforest.Application.service.order;
 
+import com.rainbowforest.Application.model.catalog.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,21 +25,28 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 	@Autowired
 	private ProductService productService;
 
+
+
 	@Override
 	public void saveOrder(OrderDetails order) {
+
 		// Handle detached ConstructionSite
 		if (order.getConstructionSite() != null && order.getConstructionSite().getId() > 0) {
 			ConstructionSite managedSite = constructionSiteService.findById(order.getConstructionSite().getId());
 			order.setConstructionSite(managedSite);
 		}
 
-		// Handle detached Products in order items
+		// Handle Items properly
 		if (order.getOrderItems() != null) {
-			for (OrderDetails item : order.getOrderItems()) {
+			for (Item item : order.getOrderItems()) {   // ✅ FIXED
+
 				if (item.getProduct() != null && item.getProduct().getId() > 0) {
 					Product managedProduct = productService.findById(item.getProduct().getId());
 					item.setProduct(managedProduct);
 				}
+
+				// VERY IMPORTANT (relationship mapping)
+				item.setOrderDetails(order);
 			}
 		}
 

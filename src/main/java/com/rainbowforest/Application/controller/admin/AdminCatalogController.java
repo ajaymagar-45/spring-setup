@@ -1,4 +1,4 @@
-package com.rainbowforest.Application.controller;
+package com.rainbowforest.Application.controller.admin;
 
 import java.util.List;
 import java.util.Locale;

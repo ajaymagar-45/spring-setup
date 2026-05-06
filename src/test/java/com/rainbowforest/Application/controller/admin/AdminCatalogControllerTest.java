@@ -1,6 +1,5 @@
 package com.rainbowforest.Application.controller.admin;
 
-import com.rainbowforest.Application.controller.AdminCatalogController;
 import com.rainbowforest.Application.model.catalog.Product;
 import com.rainbowforest.Application.service.product.ProductService;
 import org.junit.jupiter.api.Test;

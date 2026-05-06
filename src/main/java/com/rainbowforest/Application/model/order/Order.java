@@ -35,7 +35,6 @@ public class Order {
 	
 	@ManyToOne (cascade = CascadeType.MERGE)
 	@JoinColumn(name = "construction_site_id")
-	@JsonManagedReference
 	private ConstructionSite constructionSite;
 
 	@OneToOne (mappedBy = "order")

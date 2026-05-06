@@ -16,7 +16,7 @@ import com.rainbowforest.Application.model.order.OrderDetails;
 
 @Entity
 @Table (name = "cart_item")
-@JsonIgnoreProperties({"ordersDetails", "hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"orderDetails", "hibernateLazyInitializer", "handler"})
 public class Item  {
 
 	@Id
@@ -28,9 +28,9 @@ public class Item  {
 	@ManyToOne
 	@JoinColumn (name = "product_id")
 	private Product product;
-	
-	@ManyToMany (mappedBy = "items")
-	private List<OrderDetails> ordersDetails;
+	@ManyToOne
+	@JoinColumn(name = "order_details_id")
+	private OrderDetails orderDetails;
 	
 	public Integer getId() {
 		return id;
@@ -58,5 +58,15 @@ public class Item  {
 		super();
 		this.product = product;
 		this.quantity = quantity;
+	}
+
+
+
+	public OrderDetails getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(OrderDetails orderDetails) {
+		this.orderDetails = orderDetails;
 	}
 }

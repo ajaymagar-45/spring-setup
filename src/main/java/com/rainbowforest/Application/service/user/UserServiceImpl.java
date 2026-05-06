@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 import com.rainbowforest.Application.service.constructionsite.ConstructionSiteService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserAccountDetailsRepository userDetailsRepository;
 
+	@Autowired
 	private ConstructionSiteService constructionSiteService;
 
 	@Override
@@ -97,6 +99,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void securityUpdate(String newUserPassword, Integer newUserEnabled, Integer newRoleId, Integer id) {
 		userRepository.securityUpdate(newUserPassword, newUserEnabled, newRoleId, id);
+	}
+
+	@Override
+	public User getCurrentUser() {
+		return null;
 	}
 
 	@Override

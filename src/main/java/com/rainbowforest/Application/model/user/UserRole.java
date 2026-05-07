@@ -1,5 +1,7 @@
 package com.rainbowforest.Application.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,6 +22,7 @@ public class UserRole {
 	private String userRole;
 
 	@OneToMany (mappedBy = "role")
+	@JsonIgnore
 	private List<UserAccount> userList;
 
 	public Integer getId() {

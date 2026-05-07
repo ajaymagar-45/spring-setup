@@ -4,9 +4,9 @@ import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 import com.rainbowforest.Application.model.user.UserAccount;
 import com.rainbowforest.Application.model.user.UserAccountDetails;
 import com.rainbowforest.Application.model.user.UserRole;
+import com.rainbowforest.Application.repository.UserRoleRepository;
 import com.rainbowforest.Application.service.constructionsite.ConstructionSiteService;
 import com.rainbowforest.Application.service.user.UserService;
-import com.rainbowforest.Application.utilities.UserUtilities;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +27,9 @@ UserRestController {
 
     @Autowired
     private ConstructionSiteService constructionSiteService;
+
+    @Autowired
+    private UserRoleRepository roleRepository;
 
     // ── User Details ──────────────────────────────────────────────
 
@@ -116,6 +119,6 @@ UserRestController {
     @Secured("ROLE_ADMIN")
     public ResponseEntity<List<UserRole>> getRoles() {
         // Add findAllRoles() to UserService — see README
-        return ResponseEntity.ok(List.of());
+        return ResponseEntity.ok(roleRepository.findAll());
     }
 }

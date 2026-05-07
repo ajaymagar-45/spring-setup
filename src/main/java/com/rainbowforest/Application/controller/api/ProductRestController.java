@@ -56,7 +56,7 @@ public class ProductRestController {
     @DeleteMapping("/{id}")
     @Secured("ROLE_ADMIN")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        // Add deleteProduct to ProductService if not present
+        productService.deleteProduct(id);  // Actually delete the product
         return ResponseEntity.noContent().build();
     }
 }

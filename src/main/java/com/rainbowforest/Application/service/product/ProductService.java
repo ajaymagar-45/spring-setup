@@ -54,4 +54,6 @@ public interface ProductService {
 			int id);
 
     Product findById(Integer id);
+
+    void deleteProduct(int id);
 }

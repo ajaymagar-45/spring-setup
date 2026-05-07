@@ -59,4 +59,12 @@ public class ProductServiceImpl implements ProductService {
 	public Product findById(Integer id) {
 		return null;
 	}
+
+	@Override
+	public void deleteProduct(int id) {
+		if (!productRepository.existsById(id)) {
+			throw new RuntimeException("Product not found with id: " + id);
+		}
+		productRepository.deleteById(id);
+	}
 }

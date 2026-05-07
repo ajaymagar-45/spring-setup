@@ -19,13 +19,14 @@ import com.rainbowforest.Application.model.constructionSite.ConstructionSite;
 
 @Entity
 @Table(name = "users_details")
-@JsonIgnoreProperties({"userAccount", "hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"hibernateLazyInitializer",
+
+		"handler"})
 public class UserAccountDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@NotNull
-	private int id;
+	private Integer id;
 	@Column(name = "first_name")
 	@NotNull
 	private String firstName;
@@ -50,11 +51,11 @@ public class UserAccountDetails {
 	@JsonManagedReference
 	private UserAccount userAccount;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

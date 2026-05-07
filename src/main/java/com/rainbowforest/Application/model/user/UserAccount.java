@@ -1,5 +1,6 @@
 package com.rainbowforest.Application.model.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -7,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
-@JsonIgnoreProperties({"userAccountDetails", "hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({"userAccountDetails",  "handler"})
 public class UserAccount {
 
 	@Id
@@ -25,7 +26,7 @@ public class UserAccount {
 	private UserRole role;
 
 	@OneToOne (mappedBy = "userAccount" , fetch = FetchType.LAZY)
-	@JsonIgnore
+	@JsonBackReference
 	private UserAccountDetails userAccountDetails;
 
 	public Integer getId() {
